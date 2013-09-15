@@ -1,0 +1,20 @@
+config_BesucherKommentare_plugin_name              = black-night - Besucher Kommentare
+config_BesucherKommentare_plugin_desc              = Erstellt eine Kommentarfunktion. <br /> <br />Es können beliebe, unhabhängige Kommentaregruppen erstellt werden.<br /><br /><span style="font-weight:bold;">Nutzung:</span><br />{BesucherKommentare|GruppenName} Legt einen Kommentarbereich mit der Gruppe "GruppenName" an.
+config_BesucherKommentare_adminbuttontext          = Öffnen
+config_BesucherKommentare_adminbutton              = Kommentarverwaltung
+config_BesucherKommentare_newComments              = Neue Kommentare
+config_BesucherKommentare_allComments              = Alle Kommentare
+config_BesucherKommentare_NoComments               = Keine Kommentare vorhanden.
+config_BesucherKommentare_NoNewComments            = Keine neuen Kommentare vorhanden.
+config_BesucherKommentare_Delete                   = löschen
+config_BesucherKommentare_Approve                  = freischalten
+config_BesucherKommentare_Show                     = Anzeigen
+config_BesucherKommentare_CommentsOfGroup          = Kommentare der Gruppe
+config_BesucherKommentare_spamprotection           = Soll der Spamschutz für die Kommentarfunktion aktiviert werden? Die Besucher müssen dann eine einfache Spam Aufgabe lösen, um das Formular absenden zu können.
+config_BesucherKommentare_calcs                    = Spam Aufgaben<br />in jeder Zeile eine Neue<br />Frage = Antwort<br />z.B. 3 + 7 = 10
+config_BesucherKommentare_MaxLengthName            = Maximale Zeichen für Feld Name
+config_BesucherKommentare_MaxLengthWeb             = Maximale Zeichen für Feld Homepage
+config_BesucherKommentare_MaxLengthEMail           = Maximale Zeichen für Feld E-Mail
+config_BesucherKommentare_MaxLengthComment         = Maximale Zeichen für Feld Kommentar
+config_BesucherKommentare_number_regex_error       = nur Zahlen erlaubt!
+config_BesucherKommentare_EMailOnNewComment        = E-Mail Adresse an die bei einem neue Kommentar eine Nachricht geschickt werden soll.

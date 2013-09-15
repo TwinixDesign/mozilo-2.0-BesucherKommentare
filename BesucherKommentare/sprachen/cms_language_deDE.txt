@@ -1,0 +1,16 @@
+config_BesucherKommentare_Comment              = Kommentar
+config_BesucherKommentare_Send                 = senden
+config_BesucherKommentare_Name                 = Name
+config_BesucherKommentare_Web                  = Homepage
+config_BesucherKommentare_EMail                = E-Mail (wird nicht veröffentlicht)
+config_BesucherKommentare_CreateNewComment     = Neuen Kommentar erfassen
+config_BesucherKommentare_SpamProtectionText   = Spamschutz: Bitte geben Sie das Ergebnis der folgenden Aufgabe ein.
+config_BesucherKommentare_Error_SpamCalcResult = Die Antwort auf die Spamschutz-Frage war leider falsch.
+config_BesucherKommentare_Error_SentToFast     = Sie müssen mindestens 15 Sekunden warten, bis Sie Ihre Nachricht absenden dürfen.
+config_BesucherKommentare_Error_NameToLong     = Feld Name ist zu lang!
+config_BesucherKommentare_Error_WebToLong      = Feld Homepage ist zu lang!
+config_BesucherKommentare_Error_EMailToLong    = Feld E-Mail ist zu lang!
+config_BesucherKommentare_Error_CommentToLong  = Feld Kommentar ist zu lang!
+config_BesucherKommentare_EMailSubject         = Neuer Kommentar
+config_BesucherKommentare_EMailContent         = Es wurde folgender Kommentar hinterlassen: 
+config_BesucherKommentare_SuccessfulAdd        = Kommentar erfolgreich gespeichert. Die Anzeige erfolgt erst nach Freigabe.
