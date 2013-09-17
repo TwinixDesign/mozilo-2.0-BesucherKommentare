@@ -1,7 +1,5 @@
 <?php if(!defined('IS_ADMIN') or !IS_ADMIN) die();
 
-$bk_Admin = new BK_Admin($plugin);
-return $bk_Admin->output();
 class BK_Admin extends BesucherKommentare {
 	const TAB_NEW_COMMENTS = 'newComments';
 	const TAB_ALL_COMMENTS = 'allComments';
@@ -152,4 +150,7 @@ class BK_Admin extends BesucherKommentare {
 		return $dateien;
 	}
 }
+
+$bk_Admin = new BK_Admin($plugin);
+return $bk_Admin->output();
 ?>
