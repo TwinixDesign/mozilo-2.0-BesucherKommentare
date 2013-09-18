@@ -60,12 +60,13 @@ class BK_Admin extends BesucherKommentare {
 		$html  = '';
 		$html .= '<ul class="mo-ul"><li class="mo-li ui-widget-content ui-corner-all">';
 		$html .= '<div class="mo-li-head-tag mo-tag-height-from-icon mo-li-head-tag-no-ul mo-middle ui-state-default ui-corner-top">';
-		$html .= $lang_bk_admin->get("config_BesucherKommentare_newComments").':</div>';
+		$html .= '<span class="mo-bold">'.$lang_bk_admin->get("config_BesucherKommentare_newCommentsNotApproved").'</span></div>';
 		$html .= '<ul class="mo-in-ul-ul">';
 		$NewComments = bkDatabase::loadArray(PLUGIN_DIR_REL."BesucherKommentare/data/".bkCommentNew::BK_NEWCOMMENTS_FILENAME);		
 		if (is_array($NewComments) and count($NewComments) > 0) {
 			foreach ($NewComments as $Comment) {
 				$html .= '<li class="mo-in-ul-li mo-inline ui-widget-content ui-corner-all ui-helper-clearfix">';
+				$html .= $Comment->Group.' - ';
 				$html .= $this->getCommentAsHTML($Comment);
 				$html .= '<br/>';
 				$html .= '<a href="'.PLUGINADMIN_GET_URL.'&amp;actab='.self::TAB_NEW_COMMENTS.'&amp;delete='.$Comment->ID.'">'.$lang_bk_admin->get("config_BesucherKommentare_Delete").'</a>';
@@ -83,21 +84,25 @@ class BK_Admin extends BesucherKommentare {
 	
 	private function getAllCommentsHTML() {
 		global $lang_bk_admin;
+		$showGroup = getRequestValue('commentGroup',false,false);
 		$html  = '<div class="js-tools-show-hide mo-li-head-tag mo-li-head-tag-no-ul ui-state-active ui-corner-all ui-helper-clearfix">';
 		$html .= '<form name="bkAllComments" method="post" action="#bkAllComments">';
 		$html .= '<select name="commentGroup" size="1">';
 		$commentGroups = $this->getFilesAsArray(PLUGIN_DIR_REL.'BesucherKommentare/data/');
 		foreach ($commentGroups as $group) {
-			$html .= '<option>'.$group.'</option>';
+			if ($showGroup == $group) 
+				$html .= '<option selected>';
+			else 
+				$html .= '<option>';				
+			$html .= $group.'</option>';
 		}
 		$html .= '</select>';
 		$html .= '<input name="bksubmit" type="submit" value="'.$lang_bk_admin->get("config_BesucherKommentare_Show").'" />';
-		$html .= '</form></div>';
-		$showGroup = getRequestValue('commentGroup',false,false);
+		$html .= '</form></div>';		
 		if ($showGroup !== false) {
 			$html .= '<ul class="mo-ul"><li class="mo-li ui-widget-content ui-corner-all">';
 			$html .= '<div class="mo-li-head-tag mo-tag-height-from-icon mo-li-head-tag-no-ul mo-middle ui-state-default ui-corner-top">';
-			$html .= $lang_bk_admin->get("config_BesucherKommentare_CommentsOfGroup").' '.$showGroup.':</div>';
+			$html .= '<span class="mo-bold">'.$lang_bk_admin->get("config_BesucherKommentare_CommentsOfGroup").' '.$showGroup.'</span></div>';
 			$html .= '<ul class="mo-in-ul-ul">';
 			$Comments = bkDatabase::loadArray(PLUGIN_DIR_REL."BesucherKommentare/data/".$showGroup.'.data.php');
 			if (is_array($Comments)) {
