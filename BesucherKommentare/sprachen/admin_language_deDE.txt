@@ -3,6 +3,7 @@ config_BesucherKommentare_plugin_desc              = Erstellt eine Kommentarfunk
 config_BesucherKommentare_adminbuttontext          = Öffnen
 config_BesucherKommentare_adminbutton              = Kommentarverwaltung
 config_BesucherKommentare_newComments              = Neue Kommentare
+config_BesucherKommentare_newCommentsNotApproved   = Noch nicht freigeschaltete Kommentare
 config_BesucherKommentare_allComments              = Alle Kommentare
 config_BesucherKommentare_NoComments               = Keine Kommentare vorhanden.
 config_BesucherKommentare_NoNewComments            = Keine neuen Kommentare vorhanden.
@@ -18,3 +19,5 @@ config_BesucherKommentare_MaxLengthEMail           = Maximale Zeichen für Feld 
 config_BesucherKommentare_MaxLengthComment         = Maximale Zeichen für Feld Kommentar
 config_BesucherKommentare_number_regex_error       = nur Zahlen erlaubt!
 config_BesucherKommentare_EMailOnNewComment        = E-Mail Adresse an die bei einem neue Kommentar eine Nachricht geschickt werden soll.
+config_BesucherKommentare_DateFormat               = Datumsformat in <a href="http://de3.php.net/manual/de/function.date.php">php Syntax</a>. (Standard d.m.Y G:i:s)
+config_BesucherKommentare_LoadTime                 = Aller wieviel Sekunden darf ein Besucher einen neuen Kommentar absenden? (Standard 15)

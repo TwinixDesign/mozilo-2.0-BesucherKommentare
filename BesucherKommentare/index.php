@@ -25,6 +25,7 @@ class BesucherKommentare extends Plugin {
 	const SETTING_MAXLENGTH_COMMENT = 'maxlength_comment';
 	const SETTING_EMAIL = 'email';
 	const SETTING_DATEFORMAT = 'dateformat';
+	const SETTING_LOADTIME = 'loadtime';
 	
 	private $bkerror = '';
 	
@@ -35,7 +36,7 @@ class BesucherKommentare extends Plugin {
     	$this->bkerror = '';
     	$AddCommentSuccessful = false;
     	$dir = PLUGIN_DIR_REL."BesucherKommentare/";
-    	$lang_BesucherKommentare_cms = new Properties($dir."sprachen/cms_language_".$CMS_CONF->get("cmslanguage").".txt");
+    	$lang_BesucherKommentare_cms = new Language($dir."sprachen/cms_language_".$CMS_CONF->get("cmslanguage").".txt");
         $value = $specialchars->replacespecialchars($specialchars->getHtmlEntityDecode($value),false);
         if ($value.'.data.php' == bkCommentNew::BK_NEWCOMMENTS_FILENAME) {
         	return $value.' Ist nicht gültig!';
@@ -84,6 +85,13 @@ class BesucherKommentare extends Plugin {
         		"description" => $lang_bk_admin->get("config_BesucherKommentare_adminbutton"),
         		"datei_admin" => "admin.php"
         );      
+        $config[self::SETTING_LOADTIME] = array(
+        		"type" => "text",
+        		"description" => $lang_bk_admin->get("config_BesucherKommentare_LoadTime"),
+        		"maxlength" => "4",
+        		"regex" => "/^[1-9][0-9]?/",
+        		"regex_error" => $lang_bk_admin->get("config_BesucherKommentare_number_regex_error")
+        );        
         $config[self::SETTING_SPAMPROTECTION] = array(
         		"type" => "checkbox",
         		"description" => $lang_bk_admin->get("config_BesucherKommentare_spamprotection")
@@ -173,27 +181,27 @@ class BesucherKommentare extends Plugin {
 
     function getFormHTML($groupname) {
     	global $lang_BesucherKommentare_cms;
-    	$formular  = '<div class="bkFormHead"><a name="bkNew'.$groupname.'"></a>'.$lang_BesucherKommentare_cms->get("config_BesucherKommentare_CreateNewComment").'</div>';
+    	$formular  = '<div class="bkFormHead"><a name="bkNew'.$groupname.'"></a>'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_CreateNewComment").'</div>';
     	$formular .= '<form name="bkForm" method="post" action="#bkNew'.$groupname.'">';    	
-    	$formular .= '<div class="bkFormName">'.$lang_BesucherKommentare_cms->get("config_BesucherKommentare_Name").'</div>';
+    	$formular .= '<div class="bkFormName">'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_Name").'</div>';
     	$formular .= '<input name="bkName" class="bkFormName" type="text" maxlength="'.$this->settings->get(self::SETTING_MAXLENGTH_NAME).'" value="'.$this->getRequestValueWithDefault('bkName').'" />';
-    	$formular .= '<div class="bkFormWeb">'.$lang_BesucherKommentare_cms->get("config_BesucherKommentare_Web").'</div>';
+    	$formular .= '<div class="bkFormWeb">'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_Web").'</div>';
     	$formular .= '<input name="bkWeb" class="bkFormWeb" type="text" maxlength="'.$this->settings->get(self::SETTING_MAXLENGTH_WEB).'" value="'.$this->getRequestValueWithDefault('bkWeb').'" />';
-    	$formular .= '<div class="bkFormEMail">'.$lang_BesucherKommentare_cms->get("config_BesucherKommentare_EMail").'</div>';
+    	$formular .= '<div class="bkFormEMail">'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_EMail").'</div>';
     	$formular .= '<input name="bkEMail" class="bkFormEMail" type="text" maxlength="'.$this->settings->get(self::SETTING_MAXLENGTH_EMAIL).'" value="'.$this->getRequestValueWithDefault('bkEMail').'" />';    	
-    	$formular .= '<div class="bkFormKommentar">'.$lang_BesucherKommentare_cms->get("config_BesucherKommentare_Comment").'</div>';
+    	$formular .= '<div class="bkFormKommentar">'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_Comment").'</div>';
     	$formular .= '<textarea name="bkComment" class="bkFormKommentar" maxlength="'.$this->settings->get(self::SETTING_MAXLENGTH_COMMENT).'">'.$this->getRequestValueWithDefault('bkComment').'</textarea>';
     	
     	if($this->settings->get(self::SETTING_SPAMPROTECTION) == "true") {
     		// Spamschutz-Aufgabe
     		$calculation_data = $this->getRandomSpamCalc();
     		$_SESSION[self::SESSION_SPAMCALCRESULT] = $calculation_data[1];
-    		$formular .= '<div class="bkFormSpamProtectionText">'.$lang_BesucherKommentare_cms->get("config_BesucherKommentare_SpamProtectionText").'</div>';
+    		$formular .= '<div class="bkFormSpamProtectionText">'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_SpamProtectionText").'</div>';
 			$formular .= '<div class="bkFormSpamProtectionCalc">'.$calculation_data[0].'</div>';
-    		$formular .= '<input name="bkSpamCalcResult" class="bkFormSpamProtectionCalcResult" type="text" />';    	
+    		$formular .= '<input name="bkSpamCalcResult" class="bkFormSpamProtectionCalcResult" type="text" autocomplete="off" />';    	
     	}    	
     	
-    	$formular .= '<br/><input name="bksubmit" class="bksubmit" type="submit" value="'.$lang_BesucherKommentare_cms->get("config_BesucherKommentare_Send").'" />';
+    	$formular .= '<br/><input name="bksubmit" class="bksubmit" type="submit" value="'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_Send").'" />';
 		$formular .= '</form>'; 
 		return $formular;   	
     }   
@@ -238,8 +246,8 @@ class BesucherKommentare extends Plugin {
     	$InfoEMail = $this->settings->get(self::SETTING_EMAIL);
     	if ($InfoEMail <> '') {
     		require_once(BASE_DIR_CMS."Mail.php");
-    		sendMail(	$lang_BesucherKommentare_cms->get("config_BesucherKommentare_EMailSubject"), 
-    					$lang_BesucherKommentare_cms->get("config_BesucherKommentare_EMailContent").$name.' - '.$comment, 
+    		sendMail(	$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_EMailSubject"), 
+    					$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_EMailContent").$name.' - '.$comment, 
     					$InfoEMail, $InfoEMail, $InfoEMail);
     	}    	
     	return $result;
@@ -266,19 +274,22 @@ class BesucherKommentare extends Plugin {
     function getSuccessfulAddHTML($value) {
     	global $lang_BesucherKommentare_cms;    	
     	if ($value) {
-    		return '<div class="bkSuccessful">'.$lang_BesucherKommentare_cms->get("config_BesucherKommentare_SuccessfulAdd").'</div>';
+    		return '<div class="bkSuccessful">'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_SuccessfulAdd").'</div>';
     	}
     }
     
     function checkSpam() {
     	global $lang_BesucherKommentare_cms;
     	$error = '';
-    	if (time() - $_SESSION[self::SESSION_LOADTIME] < 15) {
-    		$error .= $lang_BesucherKommentare_cms->get("config_BesucherKommentare_Error_SentToFast");
+    	$loadtime = $this->settings->get(self::SETTING_LOADTIME);
+    	if ($loadtime == '') 
+    		$loadtime = 15;
+    	if (time() - $_SESSION[self::SESSION_LOADTIME] < $loadtime) {
+    		$error .= $lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_Error_SentToFast",$loadtime);
     	}
     	if($error == '' and $this->settings->get(self::SETTING_SPAMPROTECTION) == "true") {
     		if (strtolower($_SESSION[self::SESSION_SPAMCALCRESULT]) != strtolower(getRequestValue('bkSpamCalcResult',false,false))) {
-    			$error .= $lang_BesucherKommentare_cms->get("config_BesucherKommentare_Error_SpamCalcResult");
+    			$error .= $lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_Error_SpamCalcResult");
     		}
     	}    	
     	return $error;
