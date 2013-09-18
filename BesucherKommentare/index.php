@@ -24,6 +24,7 @@ class BesucherKommentare extends Plugin {
 	const SETTING_MAXLENGTH_EMAIL = 'maxlength_email';
 	const SETTING_MAXLENGTH_COMMENT = 'maxlength_comment';
 	const SETTING_EMAIL = 'email';
+	const SETTING_DATEFORMAT = 'dateformat';
 	
 	private $bkerror = '';
 	
@@ -125,6 +126,11 @@ class BesucherKommentare extends Plugin {
         		"description" => $lang_bk_admin->get("config_BesucherKommentare_EMailOnNewComment"),
         		"maxlength" => "100"
         );                
+        $config[self::SETTING_DATEFORMAT] = array(
+        		"type" => "text",
+        		"description" => $lang_bk_admin->get("config_BesucherKommentare_DateFormat"),
+        		"maxlength" => "100"
+        );        
         return $config;            
     } // function getConfig
     
@@ -201,7 +207,7 @@ class BesucherKommentare extends Plugin {
     		usort($data,"bkComment::compare");    		
     		foreach ($data as $Comment) {
     			$result .= '<div class="bkKommentarListeEintrag">';
-				$result .= '<div class="bkDatum">'.$Comment->Date.'</div>';
+				$result .= '<div class="bkDatum">'.$this->getFormatedDate($Comment->Date).'</div>';
 				$result .= '<div class="bkName">'.$Comment->Name.'</div>';
 				if ($Comment->Web != 'http://') {
 					$result .= '<div class="bkWeb"><a href="'.$Comment->Web.'" target="_blank">'.$Comment->Web.'</a></div>';;
@@ -214,6 +220,13 @@ class BesucherKommentare extends Plugin {
     	}
     	$result .= '</div>';
     	return $result;
+    }
+    
+    function getFormatedDate($date) {    	
+    	if (strlen(trim($this->settings->get(self::SETTING_DATEFORMAT))) > 0 and $this->settings->get(self::SETTING_DATEFORMAT) !== 'd.m.Y G:i:s') 
+    		return date($this->settings->get(self::SETTING_DATEFORMAT),strtotime($date));    
+    	else 
+    		return $date;
     }
     
     function appendNewComment($groupname,$date,$name,$web,$email,$comment) {
