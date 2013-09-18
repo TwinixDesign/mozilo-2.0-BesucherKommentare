@@ -206,8 +206,7 @@ class BesucherKommentare extends Plugin {
 		return $formular;   	
     }   
     
-    function getCommentsHTML($groupname) {
-    	global $specialchars;
+    function getCommentsHTML($groupname) {    	
     	$filename = PLUGIN_DIR_REL."BesucherKommentare/data/".$groupname.'.data.php';
     	$data = bkDatabase::loadArray($filename);
     	$result = '<div class="bkKommentarListe">';    	
@@ -222,7 +221,7 @@ class BesucherKommentare extends Plugin {
 				}else{
 					$result .= '<div class="bkWeb"></div>';
 				}
-				$result .= '<div class="bkKommentar">'.$specialchars->getHtmlEntityDecode($Comment->Comment).'</div>';
+				$result .= '<div class="bkKommentar">'.$this->getFormatedComment($Comment->Comment).'</div>';
 				$result .= '</div>';
     		}    		
     	}
@@ -235,6 +234,14 @@ class BesucherKommentare extends Plugin {
     		return date($this->settings->get(self::SETTING_DATEFORMAT),strtotime($date));    
     	else 
     		return $date;
+    }
+    
+    function getFormatedComment($comment) {
+    	global $specialchars;
+    	$result = $comment;    	
+    	$result = $specialchars->getHtmlEntityDecode($result);
+    	$result = nl2br($result);
+    	return $result;  	
     }
     
     function appendNewComment($groupname,$date,$name,$web,$email,$comment) {

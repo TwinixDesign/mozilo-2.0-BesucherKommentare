@@ -23,10 +23,10 @@ class bkComment {
 			$this->ID = $ID;
 		}
 		$this->Date = $Date;
-		$this->Name = htmlspecialchars($Name);
-		$this->Comment = htmlspecialchars($Comment);
-		$this->Web = htmlspecialchars($Web);
-		$this->EMail = htmlspecialchars($EMail);
+		$this->Name = htmlspecialchars(trim($Name));
+		$this->Comment = htmlspecialchars(trim($Comment));
+		$this->Web = htmlspecialchars(trim($Web));
+		$this->EMail = htmlspecialchars(trim($EMail));
 	}
 	
 	protected function guid(){

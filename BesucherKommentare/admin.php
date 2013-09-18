@@ -136,7 +136,7 @@ class BK_Admin extends BesucherKommentare {
 	
 	private function getCommentAsHTML($Comment) {
 		global $specialchars;
-		return $Comment->Date.' - '.$Comment->Name.'<br/>www:'.$Comment->Web.' mail:'.$Comment->EMail.'<br/>'.$specialchars->getHtmlEntityDecode($Comment->Comment).'<br/>';
+		return $Comment->Date.' - '.$Comment->Name.'<br/>www:'.$Comment->Web.' mail:'.$Comment->EMail.'<br/>'.nl2br($specialchars->getHtmlEntityDecode($Comment->Comment)).'<br/>';
 	}
 	
 	private function getFilesAsArray($dir) {
