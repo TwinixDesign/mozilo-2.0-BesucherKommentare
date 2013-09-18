@@ -157,7 +157,7 @@ class BesucherKommentare extends Plugin {
         $lang_bk_admin = new Properties($dir."sprachen/admin_language_".$language.".txt",false);        
         $info = array(
             // Plugin-Name
-            "<b>".$lang_bk_admin->get("config_BesucherKommentare_plugin_name")."</b> \$Revision: 1 $",
+            "<b>".$lang_bk_admin->get("config_BesucherKommentare_plugin_name")."</b> \$Revision: 2 $",
             // CMS-Version
             "2.0",
             // Kurzbeschreibung
