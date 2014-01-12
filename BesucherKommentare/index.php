@@ -184,13 +184,13 @@ class BesucherKommentare extends Plugin {
     	$formular  = '<div class="bkFormHead"><a name="bkNew'.$groupname.'"></a>'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_CreateNewComment").'</div>';
     	$formular .= '<form name="bkForm" method="post" action="#bkNew'.$groupname.'">';    	
     	$formular .= '<div class="bkFormName">'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_Name").'</div>';
-    	$formular .= '<input name="bkName" class="bkFormName" type="text" maxlength="'.$this->settings->get(self::SETTING_MAXLENGTH_NAME).'" value="'.$this->getRequestValueWithDefault('bkName').'" />';
+    	$formular .= '<input name="bkName" class="bkFormName form-control" type="text" maxlength="'.$this->settings->get(self::SETTING_MAXLENGTH_NAME).'" value="'.$this->getRequestValueWithDefault('bkName').'" />';
     	$formular .= '<div class="bkFormWeb">'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_Web").'</div>';
-    	$formular .= '<input name="bkWeb" class="bkFormWeb" type="text" maxlength="'.$this->settings->get(self::SETTING_MAXLENGTH_WEB).'" value="'.$this->getRequestValueWithDefault('bkWeb').'" />';
+    	$formular .= '<input name="bkWeb" class="bkFormWeb form-control" type="text" maxlength="'.$this->settings->get(self::SETTING_MAXLENGTH_WEB).'" value="'.$this->getRequestValueWithDefault('bkWeb').'" />';
     	$formular .= '<div class="bkFormEMail">'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_EMail").'</div>';
-    	$formular .= '<input name="bkEMail" class="bkFormEMail" type="text" maxlength="'.$this->settings->get(self::SETTING_MAXLENGTH_EMAIL).'" value="'.$this->getRequestValueWithDefault('bkEMail').'" />';    	
+    	$formular .= '<input name="bkEMail" class="bkFormEMail form-control" type="text" maxlength="'.$this->settings->get(self::SETTING_MAXLENGTH_EMAIL).'" value="'.$this->getRequestValueWithDefault('bkEMail').'" />';    	
     	$formular .= '<div class="bkFormKommentar">'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_Comment").'</div>';
-    	$formular .= '<textarea name="bkComment" class="bkFormKommentar" maxlength="'.$this->settings->get(self::SETTING_MAXLENGTH_COMMENT).'">'.$this->getRequestValueWithDefault('bkComment').'</textarea>';
+    	$formular .= '<textarea name="bkComment" class="bkFormKommentar form-control" maxlength="'.$this->settings->get(self::SETTING_MAXLENGTH_COMMENT).'">'.$this->getRequestValueWithDefault('bkComment').'</textarea>';
     	
     	if($this->settings->get(self::SETTING_SPAMPROTECTION) == "true") {
     		// Spamschutz-Aufgabe
@@ -198,10 +198,10 @@ class BesucherKommentare extends Plugin {
     		$_SESSION[self::SESSION_SPAMCALCRESULT] = $calculation_data[1];
     		$formular .= '<div class="bkFormSpamProtectionText">'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_SpamProtectionText").'</div>';
 			$formular .= '<div class="bkFormSpamProtectionCalc">'.$calculation_data[0].'</div>';
-    		$formular .= '<input name="bkSpamCalcResult" class="bkFormSpamProtectionCalcResult" type="text" autocomplete="off" />';    	
+    		$formular .= '<input name="bkSpamCalcResult" class="bkFormSpamProtectionCalcResult  form-control" type="text" autocomplete="off" />';    	
     	}    	
     	
-    	$formular .= '<br/><input name="bksubmit" class="bksubmit" type="submit" value="'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_Send").'" />';
+    	$formular .= '<br/><input name="bksubmit" class="bksubmit btn btn-default" type="submit" value="'.$lang_BesucherKommentare_cms->getLanguageValue("config_BesucherKommentare_Send").'" />';
 		$formular .= '</form>'; 
 		return $formular;   	
     }   
