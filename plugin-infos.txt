@@ -4,7 +4,8 @@ Angaben zum Plugin:
 	
 * Plugin: BesucherKommentare
 * Author: blacknight - Daniel Neef
-* Version: 1
+* Editiert durch: Mighty - Sven Svetic
+* Version: 1.1
 * Lizenz: 
       * LGPL 3.0 (http://www.gnu.org/licenses/lgpl) (Deutsch: http://www.gnu.de/documents/lgpl-3.0.de.html)
    

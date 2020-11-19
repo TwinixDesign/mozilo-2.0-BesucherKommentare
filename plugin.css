@@ -1,0 +1,140 @@
+.bk {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.bkKommentarListeEintrag {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 0 .5em 1em 0;
+    border: 1px solid #222;
+}
+
+.bkDatum,
+.bkName,
+.bkWeb {
+    flex: 1 1 30%;
+    margin: .8em .5em 1em 0;
+    padding: .5em 1em;
+    border-bottom: 1px solid #222;
+
+}
+
+.bkKommentar {
+    flex: 1 1 100%;
+    margin: 0 .5em 1em 0;
+    padding: .5em 1em;
+
+}
+
+.bkFormHead {
+    margin: 0 .5em 1em 0;
+    padding: .5em 1em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.bkForm {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+input[type=text],
+input[type=email] {
+    width: 60%;
+    margin: 0 .5em 1em 0;
+    padding: .5em 1em;
+    border: 2px solid transparent;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    background-color: #0372B0;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    border: 2px solid transparent;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    background-color: #0372B0;
+}
+
+input:focus,
+textarea:focus {
+    opacity: 0.6;
+    color: #fff;
+    font-size: 18px;
+    border: 2px solid #F07D00;
+}
+
+input[type=submit] {
+    display: block;
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    margin: 0 .5em 1em 0;
+    padding: .5em 1em;
+    background-color: #0372B0;
+    border: none;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #F07D00;
+}
+
+.bkFormName,
+.bkFormWeb,
+.bkFormEMail,
+.bkFormKommentar,
+.bkFormSpamProtectionCalc,
+.bkFormSpamProtectionCalcResult {
+    flex: 1 1 20%;
+    padding: .5em 1em;
+}
+
+.bkFormSpamProtectionText {
+    flex: 1 1 100%;
+    margin: 0 .5em 1em 0;
+    padding: .5em 1em;
+}
+
+.bkError,
+.bkSuccessful {
+    border: 1px solid #222;
+	margin: 10px auto;
+	padding: 15px 10px 15px 50px;
+	width: 90%;
+}
+.bkError {
+    color: #D8000C;
+	background-color: #FFBABA;
+}
+
+.bkError:before{
+    font-family: FontAwesome;
+    content: '\f057 ';
+    font-size: 24px;
+    color: #D8000C;
+ }
+
+.bkSuccessful {
+    color: #4F8A10;
+	background-color: #DFF2BF;
+}
+
+.bkSuccessful:before{
+    font-family: FontAwesome;
+    content: '\f046 ';
+    font-size: 24px;
+    color: #4F8A10;
+ }
+
+@media only screen and (max-width: 580px) {
+    input[type=text],
+    input[type=email] {
+        width: 80%;
+    }
+}
